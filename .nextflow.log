@@ -1,0 +1,85 @@
+Jun-30 13:33:51.036 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.p1.nf -c nextflow.config
+Jun-30 13:33:51.135 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 26.04.4
+Jun-30 13:33:51.159 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/net/fantasia/home/jblamer/.nextflow/plugins; core-plugins: nf-amazon@3.9.2,nf-azure@1.22.6,nf-cloudcache@0.6.0,nf-codecommit@0.5.3,nf-console@1.3.0,nf-google@1.27.3,nf-k8s@1.5.4,nf-seqera@0.21.0,nf-tower@1.28.1,nf-wave@1.21.0
+Jun-30 13:33:51.197 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jun-30 13:33:51.198 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jun-30 13:33:51.202 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.14.1 in 'deployment' mode
+Jun-30 13:33:51.218 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+Jun-30 13:33:51.338 [main] DEBUG nextflow.plugin.PluginUpdater - Using plugin repository: HttpPluginRepository [registry]; url=https://registry.nextflow.io/api
+Jun-30 13:33:51.344 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jun-30 13:33:51.374 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/nextflow.config
+Jun-30 13:33:51.379 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/nextflow.config
+Jun-30 13:33:51.381 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/nextflow.config
+Jun-30 13:33:51.381 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/nextflow.config
+Jun-30 13:33:51.385 [main] DEBUG nextflow.config.ConfigParserFactory - Using config parser v2
+Jun-30 13:33:51.401 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Jun-30 13:33:51.752 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Jun-30 13:33:51.797 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jun-30 13:33:51.797 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Jun-30 13:33:51.816 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /net/fantasia/home/jblamer/.nextflow/secrets/store.json
+Jun-30 13:33:51.820 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@762637be] - activable => nextflow.secret.LocalSecretsProvider@762637be
+Jun-30 13:33:51.835 [main] DEBUG nextflow.cli.CmdRun - Launching `main.p1.nf` [crazy_shockley] - revision: 8b0c801094
+Jun-30 13:33:51.938 [main] DEBUG nextflow.Session - Session UUID: c72a504c-c81b-4149-9a16-791502759012
+Jun-30 13:33:51.939 [main] DEBUG nextflow.Session - Run name: crazy_shockley
+Jun-30 13:33:51.939 [main] DEBUG nextflow.Session - Executor pool size: 96
+Jun-30 13:33:51.949 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Jun-30 13:33:51.955 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=288; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Jun-30 13:33:51.986 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 26.04.4 build 12445
+  Created: 17-06-2026 16:30 UTC (12:30 EDT)
+  System: Linux 6.8.0-111-generic
+  Runtime: Groovy 4.0.31 on Java HotSpot(TM) 64-Bit Server VM 17.0.12+8-LTS-286
+  Encoding: UTF-8 (UTF-8)
+  Process: 1112441@fantasia [192.168.1.1]
+  CPUs: 96 - Mem: 1.1 TB (1.1 TB) - Swap: 349.2 GB (349.2 GB)
+Jun-30 13:33:52.011 [main] DEBUG nextflow.Session - Work-dir: /net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/work [nfs]
+Jun-30 13:33:52.070 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jun-30 13:33:52.079 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Jun-30 13:33:52.081 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+Jun-30 13:33:52.128 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Jun-30 13:33:52.138 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 97; maxThreads: 1000
+Jun-30 13:33:52.357 [main] DEBUG nextflow.Session - Session start
+Jun-30 13:33:52.362 [main] DEBUG nextflow.script.ScriptLoaderFactory - Using script parser v2
+Jun-30 13:33:52.639 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jun-30 13:33:52.752 [main] INFO  nextflow.script.BaseScript - CONFIG CHECK: [settings:/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/pqtl.match.settings.csv, pgs:/net/topmed11/working/jblamer/qc.xqtl/match/pqtl/pgs/ukb_ppp_v2_sentinel_HT.topmed_freeze12c_minDP0_cis.prs.tsv.gz, idmap:/net/topmed3/working/exchange.area.mirror/freeze.12.sources/TOPMed_Combined_Omics_SampleAttributes_DS_20260212.txt, threads:8, distset:mahalanobis, distlambda:1, outdir:/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/tmp.output.files]
+Jun-30 13:33:52.860 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jun-30 13:33:52.861 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jun-30 13:33:52.870 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Jun-30 13:33:52.878 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=96; memory=1.1 TB; capacity=96; pollInterval=100ms; dumpInterval=5m
+Jun-30 13:33:52.880 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Jun-30 13:33:52.918 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'PHENO2PL': maxForks=0; fair=false; array=0
+Jun-30 13:33:52.955 [main] DEBUG nextflow.Session - Process names: PHENO2PL
+Jun-30 13:33:52.957 [main] DEBUG nextflow.Session - Igniting dataflow network (2)
+Jun-30 13:33:52.965 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > PHENO2PL
+Jun-30 13:33:52.966 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Main: /net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/main.p1.nf
+Jun-30 13:33:52.966 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Jun-30 13:33:52.966 [main] DEBUG nextflow.Session - Session await
+Jun-30 13:33:53.050 [Actor Thread 8] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=PHENO2PL (1); work-dir=null
+  error [nextflow.exception.ProcessUnrecoverableException]: Input tuple does not match tuple declaration in process `PHENO2PL` -- offending value: [fhs, /net/topmed11/incoming/topmed/proteomics/bcm/2025.0909.FHS.OlinkHT/TOPFHS_20260217_NPX_Batch1-36.csv, /net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/npx.column.mapping.fhs.csv]
+Jun-30 13:33:53.079 [Actor Thread 8] ERROR nextflow.processor.TaskProcessor - Error executing process > 'PHENO2PL (1)'
+
+Caused by:
+  Input tuple does not match tuple declaration in process `PHENO2PL` -- offending value: [fhs, /net/topmed11/incoming/topmed/proteomics/bcm/2025.0909.FHS.OlinkHT/TOPFHS_20260217_NPX_Batch1-36.csv, /net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/npx.column.mapping.fhs.csv]
+
+
+
+Tip: you can replicate the issue by changing to the process work dir and entering the command `bash .command.run`
+Jun-30 13:33:53.082 [Actor Thread 8] DEBUG nextflow.Session - Session aborted -- Cause: Input tuple does not match tuple declaration in process `PHENO2PL` -- offending value: [fhs, /net/topmed11/incoming/topmed/proteomics/bcm/2025.0909.FHS.OlinkHT/TOPFHS_20260217_NPX_Batch1-36.csv, /net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/npx.column.mapping.fhs.csv]
+Jun-30 13:33:53.085 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Jun-30 13:33:53.105 [Actor Thread 8] DEBUG nextflow.Session - The following nodes are still active:
+[process] PHENO2PL
+  status=ACTIVE
+  port 0: (queue) closed; channel: -
+  port 1: (cntrl) -     ; channel: $
+
+Jun-30 13:33:53.114 [Actor Thread 8] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=0; peakCpus=0; peakMemory=0; ]
+Jun-30 13:33:53.293 [main] DEBUG nextflow.Session - Session await > all processes finished
+Jun-30 13:33:53.293 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jun-30 13:33:53.294 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=0; peakCpus=0; peakMemory=0; ]
+Jun-30 13:33:53.294 [Actor Thread 6] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=PHENO2PL; work-dir=null
+  error [java.lang.InterruptedException]: java.lang.InterruptedException
+Jun-30 13:33:53.329 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Jun-30 13:33:53.418 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
