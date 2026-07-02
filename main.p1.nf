@@ -4,6 +4,8 @@
 
 process PHENO2PL {
 
+    tag "$prefix"
+    
     input:
     tuple val(prefix),
           path(pheno_input),
@@ -13,10 +15,10 @@ process PHENO2PL {
 
     output:
     tuple val(prefix),
-          path("assay.tsv"),
-          path("samples.tsv"),
-          path("npx_plink.txt"),
-          path("idmap.txt"),
+          path("${prefix}.assay.tsv"),
+          path("${prefix}.samples.tsv"),
+          path("${prefix}.npx_plink.txt"),
+          path("${prefix}.idmap.txt"),
           path(pgs)
 
     script:
@@ -36,11 +38,14 @@ workflow {
     runx = Channel
         .fromPath(params.settings)
         .splitCsv(header:true)
+        .view()
         .map { row ->
             tuple(
                 row.prefix,
                 file(row.pheno),
-                file(row.colmap)
+                file(row.colmap),
+                file(params.omicsmap),
+                file(params.pgs)
             )
         }
 

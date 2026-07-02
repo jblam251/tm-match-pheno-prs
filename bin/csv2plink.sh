@@ -12,8 +12,8 @@
 
 
 # scripts
-NPX2WIDE=/net/topmed11/working/jblamer/id-checking/proteomics/bin/npx_sorted_to_plink.py
-GENIDMAP=/net/topmed11/working/jblamer/id-checking/proteomics/bin/gen.idmap.R
+GENIDMAP=/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/bin/gen.idmap.R
+NPX2WIDE=/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/bin/npx_sorted_to_plink.py
 
 # input/output
 CSV=$1
@@ -32,7 +32,7 @@ cat ${CSV} | grep -v ^Sample | grep -v ^SAMPLE | grep -v -w ext_ctrl | grep -v -
 # get sample information
 echo "extracting sample information"
 CUTCOL_SAMPLES=${COLS[0]},${COLS[6]},${COLS[5]}
-cat ${CSV} | grep -v ^Sample | grep -v ^SAMPLE | grep -v -w ext_ctrl | grep -v -w inc_ctrl | grep -v -w amp_ctrl | grep -v CONTROL | cut -d "," -f ${CUTCOL_SAMPLES} | tr , '\t' | sort | uniq > ${OUT}.samples.tsv
+cat ${CSV} | grep -v ^Sample | grep -v ^SAMPLE | grep -v -w ext_ctrl | grep -v -w inc_ctrl | grep -v -w amp_ctrl | grep -v _CONTROL | cut -d "," -f ${CUTCOL_SAMPLES} | tr , '\t' | sort | uniq > ${OUT}.samples.tsv
 
 # csv to long-format
 echo "converting CSV to long-format NPX"
