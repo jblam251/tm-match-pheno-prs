@@ -14,13 +14,13 @@ process PHENO2PL {
 
     output:
     tuple val(prefix),
-          path("${prefix}.npx.wide.tsv.gz"),
+          path("${prefix}.npx.wide.tsv"),
           path(omicsmap),
           path(pgs)
 
     script:
     """
-    csv2plink.sh \
+    csv2plink.R \
         $pheno_input \
         $pheno_colmap \
         $prefix
@@ -34,19 +34,19 @@ process GENIDMAP {
     
     input:
     tuple val(prefix),
-          path(npx_wide),
+          path(pheno_wide),
           path(omicsmap),
           path(pgs)
     
     output:
     tuple val(prefix),
-          path(npx_wide),
+          path(pheno_wide),
           path("${prefix}.idmap.tsv"),
           path(pgs)
     
     script:
     """
-    Rscript /net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/bin/gen.idmap.R $omicsmap $npx_wide ${prefix}.idmap.tsv
+    Rscript ${params.scripts}/gen.idmap.R $omicsmap $pheno_wide ${prefix}.idmap.tsv
     """          
 }
 
@@ -56,19 +56,19 @@ process SUBSET_PRS {
     
     input:
     tuple val(prefix),
-          path(npx_wide),
+          path(pheno_wide),
           path(idmap),
           path(pgs)
     
     output:
     tuple val(prefix),
-          path(npx_wide),
+          path(pheno_wide),
           path(idmap),
           path("${prefix}.pgs.tsv")
     
     script:
     """
-    /net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/bin/subset.prs.sh $pgs $idmap ${prefix}.pgs.tsv
+    ${params.scripts}/subset.prs.sh $pgs $idmap ${prefix}.pgs.tsv
     """
 
 
@@ -80,14 +80,14 @@ process MATCH_PRS {
     
     input:
     tuple val(prefix),
-          path(npx_wide),
+          path(pheno_wide),
           path(idmap),
           path(pgs_subset)
     
     script:
     """
     /net/fantasia/home/hmkang/code/working/qpgen/bin/qpgentools match-prs-pheno \
-	--pheno $npx_wide \
+	--pheno $pheno_wide \
 	--prs $pgs_subset \
 	--sample-tsv $idmap \
 	--out ${prefix}.results \
