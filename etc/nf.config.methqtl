@@ -1,0 +1,52 @@
+params {
+    type = "methylation"
+    settings = "/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/etc/match.settings.methqtl.all.csv"
+    traits = "/net/topmed11/working/jblamer/qc.xqtl/match/methqtl.0318/traits/TOPMed_mQTL_freeze1_traits_p6e14_rank1.top10k.tsv"
+    pgs = "/net/topmed11/working/jblamer/qc.xqtl/match/methqtl.0318/pgs/methyl.qtl.freeze12c.sentinel.p6e14.rank1.top10k.prs.tsv.gz"
+    omicsmap = "/net/fantasia/home/jblamer/misc/tm.data.freeze.sample.lists/TOPMed_Combined_Omics_SampleAttributes_DS_20260304.115113.wgs.frz.added.txt"
+    scripts = "/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/bin"
+}
+
+process {
+    executor = 'slurm'
+}
+
+executor {
+    queueSize = 8
+}
+
+process {
+    withName: PHENO2PL {
+        cpus = 2
+        memory = '8 GB'
+        time = '12:00:00'
+        maxForks = 2
+    }
+}
+
+process {
+    withName: GENIDMAP {
+        cpus = 8
+        memory = '32 GB'
+        time = '00:30:00'
+        maxForks = 2
+    }
+}
+
+process {
+    withName: SUBSET_PRS {
+        cpus = 2
+        memory = '8 GB'
+        time = '00:30:00'
+        maxForks = 2
+    }
+}
+
+process {
+    withName: MATCH_PRS {
+        cpus = 8
+        memory = '32 GB'
+        time = '00:30:00'
+        maxForks = 2
+    }
+}

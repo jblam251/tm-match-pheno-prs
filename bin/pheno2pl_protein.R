@@ -9,8 +9,8 @@ args=commandArgs(trailingOnly = T)
 print(paste0("script called"))
 
 ## import npx and column-mapping files
-#dat=as.data.frame(fread(args[1], sep=",", header=T))
-dat=read.csv(args[1], sep=",", header=T)
+dat=as.data.frame(data.table::fread(args[1], sep=",", header=T))
+#dat=read.csv(args[1], sep=",", header=T)
 map=read.csv(args[2], sep=",", header=T)
 print(paste0("npx data imported"))
 
@@ -30,10 +30,6 @@ if(length(idx.assay.ctrl)!=0) {
 assays=unique(dat[,map$ColumnNumber[which(map$Field=="GeneName")]])
 smps=unique(dat[,map$ColumnNumber[which(map$Field=="TOP_ID")]])
 
-# lets remove dup assays -- its causing issues with qpgentools
-#dup.assays=assays[which(duplicated(assays))]
-#assays=assays[-which(assays%in%dup.asays)]
-
 ## subset only sample, assay, and npx
 dat=dat[,map$ColumnNumber]
 gc(); Sys.sleep(5)
@@ -47,6 +43,19 @@ print(paste0("npx data reformatted to wide"))
 
 # now get to PLINK format
 mat=data.frame(FID=smps, IID=smps, mat)
+
+# any duplicate samples in phenotypes?
+dup.samples=c()
+if(any(duplicated(mat[,1]))) {
+	dup.samples=mat[,1][which(duplicated(mat[,1]))]
+	mat=mat[-which(mat[,1]%in%dup.samples),]
+}
+
+# print some stats
+writeLines(paste0("number of samples in phenotype file : ", nrow(mat)))
+writeLines(paste0("number of assays in phenotype file : ", (ncol(mat)-2)))
+writeLines(paste0("duplicate samples identified and removed : ", length(dup.samples)))
+writeLines(paste0(dup.samples, collapse=","))
 
 # write new data
 write.table(mat, paste0(args[3], ".npx.wide.tsv"), sep = "\t", col.names=T, row.names=F, quote=F)

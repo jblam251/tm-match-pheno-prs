@@ -1,8 +1,9 @@
 params {
-    settings = "/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/pqtl.match.settings.csv"
+    type = "proteomics"
+    settings = "/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/etc/match.settings.pqtl.all.csv"
     pgs = "/net/topmed11/working/jblamer/qc.xqtl/match/pqtl/pgs/ukb_ppp_v2_sentinel_GeneNames.topmed_freeze12c_minDP0_cis.prs.tsv.gz"
-    omicsmap = "/net/topmed3/working/exchange.area.mirror/freeze.12.sources/TOPMed_Combined_Omics_SampleAttributes_DS_20260304.115113.txt"
-    scripts = "/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/bin"
+    omicsmap = "/net/fantasia/home/jblamer/misc/tm.data.freeze.sample.lists/TOPMed_Combined_Omics_SampleAttributes_DS_20260304.115113.wgs.frz.added.txt"
+    scripts = "/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/bin"
 }
 
 process {
@@ -17,7 +18,7 @@ process {
     withName: PHENO2PL {
         cpus = 8
         memory = '32 GB'
-        time = '00:30:00'
+        time = '02:00:00'
         maxForks = 2
     }
 }

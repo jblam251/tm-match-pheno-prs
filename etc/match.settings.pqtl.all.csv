@@ -1,0 +1,14 @@
+prefix,pheno,colmap
+fhs,/net/topmed11/incoming/topmed/proteomics/bidmc/2024.0903.FHS.OlinkHT/FHS_OlinkHT_11182024.csv,/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/column.map.files/npx.column.mapping.fhs.csv
+ltrc,/net/topmed11/incoming/topmed/proteomics/bidmc/2024.0308.LTRC.Olink3k.modified/LTRC_Olink3K_20240619.extended.fields.csv,/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/column.map.files/npx.column.mapping.ltrc.csv
+prefix,pheno,colmap
+fhsbcm,/net/topmed11/incoming/topmed/proteomics/bcm/2025.0909.FHS.OlinkHT/TOPFHS_20260701_NPX_Batch1-36.csv,/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/column.map.files/npx.column.mapping.fhsbcm.csv
+copdgene,/net/topmed11/incoming/topmed/proteomics/bidmc/2025.0616.COPDGene_OlinkHT/BID25_COPDGene_OlinkHT_06192025.csv,/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/column.map.files/npx.column.mapping.copdgene.csv
+jhs,/net/topmed11/incoming/topmed/proteomics/bidmc/2025.0814.JHS.OlinkHT.Batch1Ver2/BID25_JHS_OlinkHT_IntensityNorm_Batch1v2_Freeze07082025_EXTERNAL.v2.csv,/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/column.map.files/npx.column.mapping.jhs.csv
+cra,/net/topmed11/incoming/topmed/proteomics/bcm/2025.0313.CRA.OlinkHT/TOPCRA_batch01_batch06.csv,/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/column.map.files/npx.column.mapping.cra.csv
+whi,/net/topmed11/incoming/topmed/proteomics/bidmc/2026.0407.WHI.Olink1500/TOPMED5WHI_EXTENDED_NPX_merged_controls_added_2021-07-15.csv,/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/column.map.files/npx.column.mapping.whi.csv
+chs,/net/topmed11/incoming/topmed/proteomics/bcm/2024.1206.CHS.OlinkHT/Topmed_CHS_Batch01_Batch54_2025-07-16.csv,/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/column.map.files/npx.column.mapping.chs.csv
+mesa,/net/topmed11/incoming/topmed/proteomics/bidmc/2025.0822.MESA.Batch1-4.Olink3k/SMP_IntensityNormalized_20250822.csv,/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/column.map.files/npx.column.mapping.mesa.csv
+cardia,/net/topmed11/incoming/topmed/proteomics/bidmc/2024.0431.CARDIA.OlinkHT/CARDIA_OlinkHT_NPX_20240617.csv,/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/column.map.files/npx.column.mapping.cardia.csv
+camp,/net/topmed11/incoming/topmed/proteomics/bcm/2025.0313.CAMP.OlinkHT/TOPCAMP_batch01_batch10_NPX.csv,/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-pqtl-id-check/etc/column.map.files/npx.column.mapping.camp.csv
+

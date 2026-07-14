@@ -3,3 +3,6 @@
 .nextflow.history*
 work/
 slurm.out/
+topmed-metabolon-qtl-id-check/
+topmed-methQTL-id-check/
+topmed-pQTL-id-check/
