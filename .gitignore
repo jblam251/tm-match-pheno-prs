@@ -1,8 +1,9 @@
 .nextflow/
 .nextflow.log*
 .nextflow.history*
+.gitignore
 work/
 slurm.out/
-topmed-metabolon-qtl-id-check/
-topmed-methQTL-id-check/
-topmed-pQTL-id-check/
+v1/
+call.nf.slurm
+notes
