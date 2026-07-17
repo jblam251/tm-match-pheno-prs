@@ -1,0 +1,68 @@
+params {
+    type = null
+    settings = null
+    omicsmap = "/net/fantasia/home/jblamer/misc/tm.data.freeze.sample.lists/TOPMed_Combined_Omics_SampleAttributes_DS_20260304.115113.wgs.frz.added.txt"
+    scripts = "/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/bin"
+}
+
+process {
+    executor = 'slurm'
+}
+
+executor {
+    queueSize = 8
+}
+
+process {
+    withName: PHENO2PL_PROTEIN {
+        cpus = 8
+        memory = '32 GB'
+        time = '01:00:00'
+        maxForks = 2
+    }
+}
+
+process {
+    withName: PHENO2PL_METABOLITE {
+        cpus = 4
+        memory = '16 GB'
+        time = '00:30:00'
+        maxForks = 2
+    }
+}
+
+process {
+    withName: PHENO2PL_METHYLATION {
+        cpus = 2
+        memory = '8 GB'
+        time = '12:00:00'
+        maxForks = 2
+    }
+}
+
+process {
+    withName: GENIDMAP {
+        cpus = 8
+        memory = '32 GB'
+        time = '00:30:00'
+        maxForks = 2
+    }
+}
+
+process {
+    withName: SUBSET_PRS {
+        cpus = 2
+        memory = '8 GB'
+        time = '00:30:00'
+        maxForks = 2
+    }
+}
+
+process {
+    withName: MATCH_PRS {
+        cpus = 8
+        memory = '32 GB'
+        time = '00:30:00'
+        maxForks = 2
+    }
+}

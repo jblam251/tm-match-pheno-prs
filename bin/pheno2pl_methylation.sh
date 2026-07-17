@@ -3,10 +3,11 @@
 # USAGE
 # $ ./beta.merge.sh [BETA DIR] [PREFIX] [PROBE LIST]
 
-BINDR=/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/topmed-methQTL-id-check/bin/bind.betas.R
+#BINDR=/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/bin/bind.betas.R
 BETADIR=$1
 PREFIX=$2
 TRAITS=$3
+BINDR=$4
 
 mkdir -p tmpd.batch
 mkdir -p tmpd.batch/tmpd.stage
@@ -28,4 +29,5 @@ echo "[$(date +%T)] merging per-sample beta noob results"
 Rscript $BINDR $OUT $PREFIX
 
 echo "[$(date +%T)] pre-processing complete"
-#rm tmpd.batch
+rm -r tmpd.batch
+

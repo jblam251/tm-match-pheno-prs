@@ -1,6 +1,28 @@
 #!/usr/bin/env nextflow
 
 
+switch (params.type) {
+    case "proteomics":
+        params.pgs = "/net/topmed11/working/jblamer/qc.xqtl/match/pqtl/pgs/ukb_ppp_v2_sentinel_GeneNames.topmed_freeze12c_minDP0_cis.prs.tsv.gz"
+        break
+    
+    case "methylation":
+        params.pgs = "/net/topmed11/working/jblamer/qc.xqtl/match/methqtl.0318/pgs/methyl.qtl.freeze12c.sentinel.p6e14.rank1.top10k.prs.tsv.gz"
+        params.traits = "/net/topmed11/working/jblamer/qc.xqtl/match/methqtl.0318/traits/TOPMed_mQTL_freeze1_traits_p6e14_rank1.top10k.tsv"
+        break
+
+    case "metabolomics":
+        params.pgs = "/net/topmed11/working/jblamer/qc.xqtl/match/metab.phase2/pgs/metab.qtl.2026.phase2.conditional.freeze12c.prs.tsv.gz"
+        params.traits = "/net/topmed11/working/jblamer/qc.xqtl/match/metab.phase2/traits/metab.qtl.2026.phase2.traits.txt"
+        break
+
+    default:
+        error "Unknown type: ${params.type}"
+}
+
+
+
+
 process PHENO2PL_PROTEIN {
 
     tag "$prefix"
@@ -20,7 +42,7 @@ process PHENO2PL_PROTEIN {
 
     script:
     """
-    ${params.scripts}/pheno2pl_protein.R\
+    ${params.scripts}/pheno2pl_protein.R \
         $pheno_input \
         $pheno_colmap \
         $prefix
@@ -77,7 +99,8 @@ process PHENO2PL_METHYLATION {
     ${params.scripts}/pheno2pl_methylation.sh \
         $data_dir \
         $prefix \
-        $traits
+        $traits \
+        ${params.scripts}/bind.betas.R
     """
 }
 
@@ -144,7 +167,7 @@ process MATCH_PRS {
 	--pheno $pheno_wide \
 	--prs $pgs_subset \
 	--sample-tsv $idmap \
-	--out ${prefix}.results \
+	--out ${params.type}.${prefix}.results \
         --threads $task.cpus \
 	--lambda 1 \
 	--mahalanobis
