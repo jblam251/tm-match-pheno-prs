@@ -84,6 +84,29 @@ process PHENO2PL_METHYLATION {
     """
 }
 
+process PHENO2PL_RNASEQ {
+
+    tag "$prefix"
+    
+    input:
+    tuple val(prefix),
+          path(pheno_input),
+          path(omicsmap),
+          path(pgs)
+
+    output:
+    tuple val(prefix),
+          path("${prefix}.reads.wide.tsv"),
+          path(omicsmap),
+          path(pgs)
+
+    script:
+    """
+    ${params.scripts}/pheno2pl_rnaseq.R \
+        $pheno_input \
+        $prefix
+    """
+}
 
 process GENIDMAP {
 
@@ -169,6 +192,9 @@ workflow {
             params.pgs = "/net/topmed11/working/jblamer/qc.xqtl/match/metab.phase2/pgs/metab.qtl.2026.phase2.conditional.freeze12c.prs.tsv.gz"
             params.traits = "/net/topmed11/working/jblamer/qc.xqtl/match/metab.phase2/traits/metab.qtl.2026.phase2.traits.txt"
     }
+    if (params.type == "rnaseq") {
+            params.pgs = "/net/topmed11/working/jblamer/qc.xqtl/match/rna.bulk/pgs/gtex.v9.whole.blood.susie.tm.eqtl.freeze12c.prs.tsv.gz"
+    }
 
 
 
@@ -219,6 +245,21 @@ workflow {
                 )
             }
         step1 = PHENO2PL_METHYLATION(runx)
+    }
+    
+    else if (params.type == "rnaseq") {
+        runx = Channel
+            .fromPath(params.settings)
+            .splitCsv(header:true)
+            .map { row ->
+                tuple(
+                    row.prefix,
+                    file(row.pheno),
+                    file(params.omicsmap),
+                    file(params.pgs)
+                )
+            }
+        step1 = PHENO2PL_RNASEQ(runx)
     }
 
     MATCH_PRS(SUBSET_PRS(GENIDMAP(step1)))

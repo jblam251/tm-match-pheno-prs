@@ -19,6 +19,7 @@ process {
         memory = '32 GB'
         time = '01:00:00'
         maxForks = 2
+        errorStrategy = 'ignore'
     }
 }
 
@@ -28,6 +29,7 @@ process {
         memory = '16 GB'
         time = '00:30:00'
         maxForks = 2
+        errorStrategy = 'ignore'
     }
 }
 
@@ -37,6 +39,17 @@ process {
         memory = '8 GB'
         time = '12:00:00'
         maxForks = 2
+        errorStrategy = 'ignore'
+    }
+}
+
+process {
+    withName: PHENO2PL_RNASEQ {
+        cpus = 4
+        memory = '16 GB'
+        time = '00:30:00'
+        maxForks = 2
+        errorStrategy = 'ignore'
     }
 }
 
