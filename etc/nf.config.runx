@@ -1,7 +1,7 @@
 params {
     type = null
     settings = null
-    omicsmap = "/net/fantasia/home/jblamer/misc/tm.data.freeze.sample.lists/TOPMed_Combined_Omics_SampleAttributes_DS_20260304.115113.wgs.frz.added.txt"
+    omicsmap = "/net/fantasia/home/jblamer/topmed.attributes/TOPMed_Combined_Omics_SampleAttributes_DS_20260718.144003.wgs.frz.added.txt"
     scripts = "/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/bin"
 }
 
