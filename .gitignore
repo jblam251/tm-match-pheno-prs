@@ -7,3 +7,5 @@ slurm.out/
 v1/
 call.nf.slurm
 notes
+etc/
+results/
