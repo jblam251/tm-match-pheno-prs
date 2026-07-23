@@ -59,6 +59,7 @@ process {
         memory = '32 GB'
         time = '00:30:00'
         maxForks = 2
+        errorStrategy = 'ignore'
     }
 }
 
@@ -68,6 +69,7 @@ process {
         memory = '8 GB'
         time = '00:30:00'
         maxForks = 2
+        errorStrategy = 'ignore'
     }
 }
 
