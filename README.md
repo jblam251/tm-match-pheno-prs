@@ -1,14 +1,9 @@
-# TOPMed Multi-Omics Sample Identity Checking
-Multi-omics data generated through the TOPMed program is evaluated for sample identity at the TOPMed Informatics Research Center (IRC).  The IRC leverages multiple genotyope-guided approaches to peform this task.  While this pipeline was developed for application to TOPmed data, some stratagies are assay- and technology-independent and can thus be deployed on arbitrary multi-omics studies with matched genotypes
+# PGS-Based Sample Identity Checking TOPMed Multi-Omics Data
+Multi-omics data generated through the TOPMed program is evaluated for sample identity at the TOPMed Informatics Research Center (IRC).  The IRC leverages summary statistics from published cis- and trans- molecular quantitative trait locus (xQTL) studies to compute polygenic scores (PGS) for thousands of molecular traits.  Although individual PGS explain only small fractions of trait variance, their aggregated signal provides useful QC metrics when combined across multiple individuals. While this pipeline was developed for application to TOPmed data, this stratagy is assay- and technology-independent and can thus be deployed on arbitrary multi-omics studies with matched genotypes
 
-
-# PGS-Based Sample Identity Checking
-***RNAseq, Methylation, Metabolomics, Proteomics*** \
-
-## Overview
-The IRC has developed a software, anQChor, that leverages published molecular quantitative trait locus (xQTL) studies for comprehensive QC of genotyped multi-omics datasets. anQChor uses summary statistics from cis- and trans-xQTL analyses to compute polygenic scores (PGS) for thousands of molecular traits.  Although individual PGS explain only small fractions of trait variance, their aggregated signal provides useful QC metrics when combined across multiple individuals or multiple molecular traits
 
 ## Pipeline workflow
+![Alt Text](images/pgs.schematic.1.png)
 
 
 ## How to run
