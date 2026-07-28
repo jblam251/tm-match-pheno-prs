@@ -1,5 +1,5 @@
-# PGS-Based Sample Identity Checking TOPMed Multi-Omics Data
-Multi-omics data generated through the TOPMed program is evaluated for sample identity at the TOPMed Informatics Research Center (IRC).  The IRC leverages summary statistics from published cis- and trans- molecular quantitative trait locus (xQTL) studies to compute polygenic scores (PGS) for thousands of molecular traits.  Although individual PGS explain only small fractions of trait variance, their aggregated signal provides useful QC metrics when combined across multiple individuals. While this pipeline was developed for application to TOPmed data, this stratagy is assay- and technology-independent and can thus be deployed on arbitrary multi-omics studies with matched genotypes
+# Sample Identity Checking TOPMed Multi-Omics Data
+Multi-omics data generated through the TOPMed program is evaluated for sample identity at the TOPMed Informatics Research Center (IRC).  One method that the IRC performs to accomplish this task relies on summary statistics from published cis- and trans- molecular quantitative trait locus (xQTL) studies to compute polygenic scores (PGS) for thousands of molecular traits.  Although individual PGS explain only small fractions of trait variance, their aggregated signal provides useful QC metrics when combined across multiple individuals. While this pipeline was developed for application to TOPmed data, this stratagy is assay- and technology-independent and can thus be deployed on arbitrary multi-omics studies with matched genotypes
 
 
 ## Pipeline workflow
@@ -8,34 +8,34 @@ Multi-omics data generated through the TOPMed program is evaluated for sample id
 
 ## How to run
 ```
-nextflow run main.nf -c config.runx --type [data type] --settings [local parameters]
+nextflow run main.nf -c config.runx --settings [sample settings CSV]
 ```
-
-| Argument | Required | Description |
-|----------|----------|-------------|
-| `--type` | Yes | Omics data type to process. Accepted values: `rnseq`,  `proteomics`, `methylation`, `metabolomics`. |
-| `--settings` | Yes | Path to the sample settings CSV containing one row per dataset to process. |
 
 ## Results
 to do
 
 ## Creating a Settings file
-The settings file is a comma-separated values (CSV) file containing one row per dataset. 
+A settings file is required to set run-specific parameters for analysis.  This is a comma-separated (CSV) file containing one row per dataset and 8 columns (see below).  Not all columns are required for each omics data type, this is handled automatically in the workflow.  This file can include multiple rows for batch processing
 
-| Column | Description |
-|--------|-------------|
-| `prefix` | Prefix used for naming output files. |
-| `pheno` | Input phenotype or assay file. |
-| `colmap` | Column mapping file describing the assay format. |
-| `traits` | Trait annotation file used during preprocessing. |
+| Column | Required? | Description |
+|--------|-----------|-------------|
+| `type` | Yes | The omics data type specification. It must take one of the following: `rnaseq`, `methylation`, `metabolomics`, or `proteomics`. |
+| `prefix` | Yes | Prefix used for naming output files. |
+| `pheno` | Yes | Input file of molecular phenotypes. For RNAseq, metabolomics, and proteomics, this must specify the location of the gene expression summary table, metabolite peak area table, and the proteomics NPX table respectively.  For methylation, this should be the LEVEL3 directory which contains the noob-adjusted beta values.|
+| `pgs` |  Yes | Genotype-derrived polygenic scores for each molecular trait.  If scores have yet to be generated, the qpgentools `prs-pair` function can calculate PGS if provided genotype samples of interest and a set of known QTL summary statistics.  See `prs-pair` below for more detail. |
+| `traits` | Metabolomics & methylation only | Single-column file listing the molecular trait labels. |
+| `metabolite_annotation` | Metabolomics only | The metabolite annotation file which was provided with the corresponding peak area table.  This is sometimes called the Chemical annotation file. |
+| `protein_colmap` | Proteomics only | Column mapping file which specifies which columns in the NPX data file correspond to the NPX, Sample ID, and Assay ID. |
 
 Example:
 
 ```text
-prefix,pheno,traits
-fhs,fhs.csv,colmap.csv,traits.tsv,olink.map.tsv,pgs.tsv.gz
-mesa,mesa.csv,colmap.csv,traits.tsv,olink.map.tsv,pgs.tsv.gz
+type,prefix,pheno,pgs,omicsmap,traits,metabolite_annotation,protein_colmap
+rnaseq,study1,expression.gct.gz,gtex.v11.pgs.tsv,tm.combined.omics.attributes.tsv,NA,NA,NA
+methylation,study1,release_files/,tm.methyl.qtl.fz1.pgs.tsv,tm.combined.omics.attributes.tsv,target.probes.txt,NA,NA
+metabolomics,study2,peak.areas.tsv.gz,tm.metabolomics.qtl.fz2.pgs.tsv,tm.combined.omics.attributes.tsv,target.metabolites.txt,chemical.annotation.tsv.gz,NA
+proteomics,study3,npx.tsv.gz,ukb.ppp.cis.pgs.tsv,tm.combined.omics.attributes.tsv,NA,NA,pqtl.column.map.tsv
 ```
 
-The first column specifying the desired prefix for output files.  The second column should contain the full path location to the molecular phenotype files.  For RNAseq, metabolomics, and proteomics, this must specify the location of the gene expression summary table, metabolite peak area table, and the proteomics NPX table respectively.  For methylation, this should be the LEVEL3 directory which contains the noob-adjusted beta values. Finally for metabolomics and proteomics, the settings file must contain a third column: for metabolomics this is the full path location to the chemical annotation file, whereas for proteomics this is a column mapping file which specifies which columns in the NPX data file correspond to the NPX, Sample ID, and Assay ID.  Prior to any run, a preliminary step must be taken to calculate PGS based on known QTLs (see below).  
+## Calculating PGS using `pair-prs`
 
