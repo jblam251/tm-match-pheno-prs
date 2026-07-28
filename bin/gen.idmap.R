@@ -17,7 +17,7 @@ print("files imported...")
 md6=md6[which(md6$NWD_ID.Freeze=="Freeze.12b"),]
 
 # generate ID map file
-idmap=md6[match(smp, md6$SAMPLE_ID),c(7,11)]
+idmap=md6[match(smp, md6$SAMPLE_ID),c("NWD_ID","SAMPLE_ID")]
 
 # remove phenotypes which are lacking NWDs
 if(any(is.na(idmap[,1]))) {idmap=idmap[-which(is.na(idmap[,1])),]}

@@ -58,6 +58,6 @@ writeLines(paste0("duplicate samples identified and removed : ", length(dup.samp
 writeLines(paste0(dup.samples, collapse=","))
 
 # write new data
-write.table(mat, paste0(args[3], ".npx.wide.tsv"), sep = "\t", col.names=T, row.names=F, quote=F)
+write.table(mat, paste0(args[3], ".wide.tsv"), sep = "\t", col.names=T, row.names=F, quote=F)
 gc(); Sys.sleep(5)
 print(paste0("npx data written"))

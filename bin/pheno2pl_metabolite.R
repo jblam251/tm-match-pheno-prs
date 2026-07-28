@@ -88,5 +88,5 @@ writeLines(paste0(dup.samples, collapse=","))
 
 
 # write reforamtted pa data in regenie format
-write.table(pa, paste0(args$out, ".peakareas.wide.tsv"), sep="\t", col.names=T, row.names=F, quote=F)
+write.table(pa, paste0(args$out, ".wide.tsv"), sep="\t", col.names=T, row.names=F, quote=F)
 writeLines(paste0("reforamtted peak area data written to : ", args$out))

@@ -48,4 +48,4 @@ writeLines(paste0("duplicate samples identified and removed : ", length(dup.samp
 writeLines(paste0(dup.samples, collapse=","))
 
 ## now write table
-write.table(beta.out, paste0(args[2], ".beta.noob.tsv"), sep="\t", col.names=T, row.names=F, quote=F)
+write.table(beta.out, paste0(args[2], ".wide.tsv"), sep="\t", col.names=T, row.names=F, quote=F)
