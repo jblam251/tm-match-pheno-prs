@@ -29,6 +29,7 @@ A settings file is required to set run-specific parameters for analysis.  This i
 | `protein_colmap` | Proteomics | Column mapping file which specifies which columns in the NPX data file correspond to the NPX, Sample ID, and Assay ID. |
 
 ## Calculating PGS using `pair-prs`
+to do
 
 
 
