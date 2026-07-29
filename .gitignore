@@ -2,6 +2,7 @@
 .nextflow.log*
 .nextflow.history*
 .gitignore
+todo
 work/
 slurm.out/
 v1/
