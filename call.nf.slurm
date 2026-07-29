@@ -5,7 +5,7 @@
 #SBATCH --output=slurm.out/job.log.out
 
 BASE=/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs
-TYPE=rnaseq  #one of proteomics, metabolomcs, rnaseq, or methylation
+TYPE=methylation  #one of proteomics, metabolomcs, rnaseq, or methylation
 NF=${BASE}/main.p3.nf
 CONFIG=${BASE}/etc/nf.config.runx
 SETTINGS=${BASE}/etc/match.settings.run.csv

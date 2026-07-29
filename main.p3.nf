@@ -8,15 +8,17 @@ process PHENO2PL_PROTEIN {
     tag "$prefix"
     
     input:
-    tuple val(prefix),
+    tuple val(type),
+          val(prefix),
           path(pheno_input),
-          path(pheno_colmap),
+          path(pgs),
           path(omicsmap),
-          path(pgs)
+          path(pheno_colmap)
 
     output:
-    tuple val(prefix),
-          path("${prefix}.npx.wide.tsv"),
+    tuple val(type),
+          val(prefix),
+          path("${prefix}.wide.tsv"),
           path(omicsmap),
           path(pgs)
 
@@ -34,16 +36,18 @@ process PHENO2PL_METABOLITE {
     tag "$prefix"
     
     input:
-    tuple val(prefix),
+    tuple val(type),
+          val(prefix),
           path(pheno_input),
-          path(metabol_annotation),
-          path(traits),
+          path(pgs),
           path(omicsmap),
-          path(pgs)
+          path(traits),
+          path(metabol_annotation)
     
     output:
-    tuple val(prefix),
-          path("${prefix}.peakareas.wide.tsv"),
+    tuple val(type),
+          val(prefix),
+          path("${prefix}.wide.tsv"),
           path(omicsmap),
           path(pgs)
 
@@ -62,15 +66,17 @@ process PHENO2PL_METHYLATION {
     tag "$prefix"
     
     input:
-    tuple val(prefix),
+    tuple val(type),
+          val(prefix),
           path(data_dir),
-          path(traits),
+          path(pgs),
           path(omicsmap),
-          path(pgs)
+          path(traits)
 
     output:
-    tuple val(prefix),
-          path("${prefix}.beta.noob.tsv"),
+    tuple val(type),
+          val(prefix),
+          path("${prefix}.wide.tsv"),
           path(omicsmap),
           path(pgs)
 
@@ -89,14 +95,16 @@ process PHENO2PL_RNASEQ {
     tag "$prefix"
     
     input:
-    tuple val(prefix),
+    tuple val(type),
+          val(prefix),
           path(pheno_input),
-          path(omicsmap),
-          path(pgs)
+          path(pgs),
+          path(omicsmap)
 
     output:
-    tuple val(prefix),
-          path("${prefix}.reads.wide.tsv"),
+    tuple val(type),
+          val(prefix),
+          path("${prefix}.wide.tsv"),
           path(omicsmap),
           path(pgs)
 
@@ -113,13 +121,15 @@ process GENIDMAP {
     tag "$prefix"
     
     input:
-    tuple val(prefix),
+    tuple val(type),
+          val(prefix),
           path(pheno_wide),
           path(omicsmap),
           path(pgs)
     
     output:
-    tuple val(prefix),
+    tuple val(type),
+          val(prefix),
           path(pheno_wide),
           path("${prefix}.idmap.tsv"),
           path(pgs)
@@ -135,13 +145,15 @@ process SUBSET_PRS {
     tag "$prefix"
     
     input:
-    tuple val(prefix),
+    tuple val(type),
+          val(prefix),
           path(pheno_wide),
           path(idmap),
           path(pgs)
     
     output:
-    tuple val(prefix),
+    tuple val(type),
+          val(prefix),
           path(pheno_wide),
           path(idmap),
           path("${prefix}.pgs.tsv")
@@ -159,7 +171,8 @@ process MATCH_PRS {
     tag "$prefix"
     
     input:
-    tuple val(prefix),
+    tuple val(type),
+          val(prefix),
           path(pheno_wide),
           path(idmap),
           path(pgs_subset)
@@ -170,7 +183,7 @@ process MATCH_PRS {
 	--pheno $pheno_wide \
 	--prs $pgs_subset \
 	--sample-tsv $idmap \
-	--out ${params.type}.${prefix}.results \
+	--out ${type}.${prefix}.results \
         --threads $task.cpus \
 	--lambda 1 \
 	--mahalanobis
@@ -181,87 +194,74 @@ process MATCH_PRS {
 
 workflow {
 
-    if (params.type == "proteomics") {
-            params.pgs = "/net/topmed11/working/jblamer/qc.xqtl/match/pqtl/pgs/ukb_ppp_v2_sentinel_GeneNames.topmed_freeze12c_minDP0_cis.prs.tsv.gz"
-    }
-    if (params.type == "methylation") {
-            params.pgs = "/net/topmed11/working/jblamer/qc.xqtl/match/methqtl.0318/pgs/methyl.qtl.freeze12c.sentinel.p6e14.rank1.top10k.prs.tsv.gz"
-            params.traits = "/net/topmed11/working/jblamer/qc.xqtl/match/methqtl.0318/traits/TOPMed_mQTL_freeze1_traits_p6e14_rank1.top10k.tsv"
-    }
-    if (params.type == "metabolomics") {
-            params.pgs = "/net/topmed11/working/jblamer/qc.xqtl/match/metab.phase2/pgs/metab.qtl.2026.phase2.conditional.freeze12c.prs.tsv.gz"
-            params.traits = "/net/topmed11/working/jblamer/qc.xqtl/match/metab.phase2/traits/metab.qtl.2026.phase2.traits.txt"
-    }
-    if (params.type == "rnaseq") {
-            params.pgs = "/net/topmed11/working/jblamer/qc.xqtl/match/rna.bulk/pgs/gtex.v9.whole.blood.susie.tm.eqtl.freeze12c.prs.tsv.gz"
-    }
 
-
-
-
-    if (params.type == "proteomics") {
-        runx = Channel
-            .fromPath(params.settings)
-            .splitCsv(header:true)
-            .map { row ->
-                tuple(
-                    row.prefix,
-                    file(row.pheno),
-                    file(row.colmap),
-                    file(params.omicsmap),
-                    file(params.pgs)
-                )
-            }
-        step1 = PHENO2PL_PROTEIN(runx)
-    }
-
-    else if (params.type == "metabolomics") {
-        runx = Channel
-            .fromPath(params.settings)
-            .splitCsv(header:true)
-            .map { row ->
-                tuple(
-                    row.prefix,
-                    file(row.pheno),
-                    file(row.metabol_annotation),
-                    file(params.omicsmap),
-                    file(params.pgs)
-                )
-            }
-        step1 = PHENO2PL_METABOLITE(runx)
-    }
-
-    else if (params.type == "methylation") {
-        runx = Channel
-            .fromPath(params.settings)
-            .splitCsv(header:true)
-            .map { row ->
-                tuple(
-                    row.prefix,
-                    file(row.pheno),
-                    file(params.traits),
-                    file(params.omicsmap),
-                    file(params.pgs)
-                )
-            }
-        step1 = PHENO2PL_METHYLATION(runx)
-    }
+    samples = Channel
+        .fromPath(params.settings)
+        .splitCsv(header: true)
     
-    else if (params.type == "rnaseq") {
-        runx = Channel
-            .fromPath(params.settings)
-            .splitCsv(header:true)
-            .map { row ->
-                tuple(
-                    row.prefix,
-                    file(row.pheno),
-                    file(params.omicsmap),
-                    file(params.pgs)
-                )
-            }
-        step1 = PHENO2PL_RNASEQ(runx)
-    }
+    protein = samples
+        .filter { it.type == "proteomics" }
+        .map { row ->
+            tuple(
+                row.type,
+                row.prefix,
+                file(row.pheno),
+                file(row.pgs),
+                file(row.omicsmap),
+                file(row.protein_colmap)
+            )
+        }
+    s1_protein = PHENO2PL_PROTEIN(protein)
 
+    metabolite = samples
+        .filter { it.type == "metabolomics" }
+        .map { row ->
+            tuple(
+                row.type,
+                row.prefix,
+                file(row.pheno),
+                file(row.pgs),
+                file(row.omicsmap),
+                file(row.traits),
+                file(row.metabolite_annotation)
+            )
+        }
+    s1_metabolite = PHENO2PL_METABOLITE(metabolite)
+
+
+    methyl = samples
+        .filter { it.type == "methylation" }
+        .map { row ->
+            tuple(
+                row.type,
+                row.prefix,
+                file(row.pheno),
+                file(row.pgs),
+                file(row.omicsmap),
+                file(row.traits)
+            )
+        }
+    s1_methyl = PHENO2PL_METHYLATION(methyl)
+
+
+    rna = samples
+        .filter { it.type == "rnaseq" }
+        .map { row ->
+            tuple(
+                row.type,
+                row.prefix,
+                file(row.pheno),
+                file(row.pgs),
+                file(row.omicsmap)
+            )
+        }
+    s1_rna = PHENO2PL_RNASEQ(rna)
+    
+    step1 = s1_protein
+        .mix(s1_metabolite)
+        .mix(s1_methyl)
+        .mix(s1_rna)
+    
     MATCH_PRS(SUBSET_PRS(GENIDMAP(step1)))
 }
 
