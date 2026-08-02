@@ -1,5 +1,5 @@
 # Sample Identity Checking TOPMed Multi-Omics Data
-Multi-omics data generated through the TOPMed program is evaluated for sample identity at the TOPMed Informatics Research Center (IRC).  The IRC utilizes multiple approaches for this task. The information below describes a recently developed method that leverages summary statistics from published cis- and trans- molecular quantitative trait locus (xQTL) studies to compute polygenic scores (PGS) for thousands of molecular traits.  Although individual PGS explain only small fractions of trait variance, their aggregated signal provides useful QC metrics when combined across multiple individuals. While this pipeline was developed for application to TOPmed data, this stratagy is assay- and technology-independent and can thus be deployed on arbitrary multi-omics studies with matched genotypes
+Multi-omics data generated through the TOPMed program is evaluated for sample identity at the TOPMed Informatics Research Center (IRC).  The IRC utilizes multiple approaches for this task. The information below describes a recently developed method that leverages summary statistics from published cis- and trans- molecular quantitative trait locus (xQTL) studies to compute polygenic scores (PGS) for thousands of molecular traits.  Although individual PGS explain only small fractions of trait variance, their aggregated signal provides useful QC metrics when combined across multiple individuals.
 
 
 ## Pipeline workflow
@@ -12,7 +12,12 @@ nextflow run main.nf -c config.runx --settings [sample settings CSV]
 ```
 
 ## Results
-to do
+Analysis results are compiled into a file named \*.match.all.tsv.gz.  This file contains the identifier for the omics sample, the identifier for the assigned corresponding genotype, the z-score for the assigned genotype, and the identifiers and z-scores for the top 5 genotype matches.  It also contains a `MatchStatus` column 
+
+If the omics sample is assigned to a corresponding genotype, this analysis will determine whether the PGS calculated from the assigned genotype is either the top match (`SELF_BEST`), a probable match (`SELF_LENIENT`), or a non-match (`UNCLEAR`). A lenient match is defined by the `--z-threshold` argument.  Omics samples whose top match isn't their assined genotype but have a z-score greater than this parameter are considered lenient.  Omics samples that fail to match their assigned genotype but exhibit a strong match to a genotype from a different participant are flagged as `SINGLE_NEW_BEST` (or `MULTI_NEW_BEST` if the omics sample matches more than one participant)
+
+
+
 
 ## Creating a Settings file
 A settings file is required to set run-specific parameters for analysis.  This is a comma-separated (CSV) file containing one row per dataset and 8 columns (see below).  Not all columns are required for each omics data type, this is handled automatically in the workflow.  This file can include multiple rows for batch processing

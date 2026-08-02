@@ -9,4 +9,4 @@ NF=${BASE}/main.p3.nf
 CONFIG=${BASE}/etc/nf.config.runx
 SETTINGS=${BASE}/etc/match.settings.run.csv
 
-nextflow run $NF -c $CONFIG -resume --settings $SETTINGS
+nextflow run $NF -c $CONFIG -resume --settings $SETTINGS -work-dir ./work/ver1
