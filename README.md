@@ -15,7 +15,7 @@ nextflow run main.nf -c config.runx --settings [sample settings CSV]
 Analysis results are compiled into a file named \*.match.all.tsv.gz.  This file contains the identifier for the omics sample, the identifier for the assigned corresponding genotype, the z-score for the assigned genotype, and the identifiers and z-scores for the top 5 genotype matches.  It also contains a `MatchStatus` column 
 
 If the omics sample is assigned to a corresponding genotype, this analysis will determine whether the PGS calculated from the assigned genotype is either the top match (`SELF_BEST`), a probable match (`SELF_LENIENT`), or a non-match (`UNCLEAR`). A lenient match is defined by the `--z-threshold` argument.  Omics samples whose top match isn't their assined genotype but have a z-score greater than this parameter are considered lenient.  Omics samples that fail to match their assigned genotype but exhibit a strong match to a genotype from a different participant are flagged as `SINGLE_NEW_BEST` (or `MULTI_NEW_BEST` if the omics sample matches more than one participant)
-
+![Alt Text](images/diagnostic.plot.1.png)
 
 
 
