@@ -41,7 +41,7 @@ Polygenic scores must be in PLINK format with the genotype identifiers in the fi
 qpgentools pair-prs \
 	--pgen-list genotype.pfiles.tsv \
         --pairs xqtl.summary.stats.tsv \
-        --out output
+        --out pgs.tsv
 ```
 
 
