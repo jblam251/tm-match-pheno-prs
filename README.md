@@ -1,5 +1,5 @@
 # Sample Identity Checking TOPMed Multi-Omics Data
-This workflow can be used to perform a recently developed identity check method that leverages summary statistics from published cis- and trans- molecular quantitative trait locus (xQTL) studies to compute polygenic scores (PGS) for thousands of molecular traits.  PGS is then compared to measured assay values from multi-omics data to evaluate sample assignment.  Although individual PGS explain only small fractions of trait variance, their aggregated signal provides useful QC metrics when combined across multiple individuals.
+This pipeline automates the execution of a recently developed identity check method that leverages summary statistics from published cis- and trans- molecular quantitative trait locus (xQTL) studies to compute polygenic scores (PGS) for thousands of molecular traits.  PGS is then compared to measured trait values from multi-omics data to evaluate sample assignment.
 
 
 ## Pipeline workflow
