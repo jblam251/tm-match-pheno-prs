@@ -1,5 +1,5 @@
 # Sample Identity Checking TOPMed Multi-Omics Data
-Multi-omics data generated through the TOPMed program is evaluated for sample identity at the TOPMed Informatics Research Center (IRC).  The IRC leverages multiple approaches for this task. The information below describes a recently developed method that uses summary statistics from published cis- and trans- molecular quantitative trait locus (xQTL) studies to compute polygenic scores (PGS) for thousands of molecular traits.  Although individual PGS explain only small fractions of trait variance, their aggregated signal provides useful QC metrics when combined across multiple individuals.
+This workflow can be used to perform a recently developed identity check method that leverages summary statistics from published cis- and trans- molecular quantitative trait locus (xQTL) studies to compute polygenic scores (PGS) for thousands of molecular traits.  PGS is then compared to measured assay values from multi-omics data to evaluate sample assignment.  Although individual PGS explain only small fractions of trait variance, their aggregated signal provides useful QC metrics when combined across multiple individuals.
 
 
 ## Pipeline workflow
@@ -39,7 +39,7 @@ Polygenic scores must be in PLINK format with the genotype identifiers in the fi
 
 ```
 qpgentools pair-prs \
-	--pgen-list genotype.pfiles.tsv \
+        --pgen-list genotype.pfiles.tsv \
         --pairs xqtl.summary.stats.tsv \
         --out pgs.tsv
 ```
