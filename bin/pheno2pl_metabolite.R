@@ -66,8 +66,8 @@ pa$SAMPLE_ID=NULL
 pa=pa[,c((ncol(pa)-1), ncol(pa), 1:(ncol(pa)-2))]
 
 # any metabolites that are missing >50% of samples?
-fail.traits=names(which(colSums(apply(pa[,-(1:2)], 2, is.na))/(nrow(pa)-2)>0.50))
-if(length(fail.traits)!=0) { pa=pa[,-which(colnames(pa)%in%fail.traits),] }
+#fail.traits=names(which(colSums(apply(pa[,-(1:2)], 2, is.na))/(nrow(pa)-2)>0.50))
+#if(length(fail.traits)!=0) { pa=pa[,-which(colnames(pa)%in%fail.traits),] }
 
 # any duplicate samples in phenotypes?
 dup.samples=c()
@@ -79,7 +79,7 @@ if(any(duplicated(pa[,1]))) {
 # print some stats
 writeLines(paste0("traits detected in PRS trait file : ", length(traits)))
 writeLines(paste0("traits matched in peak areas : ", length(intersect(traits, chemanno$chem.match))))
-writeLines(paste0("traits removed due to missingness >50% samples : ", length(fail.traits)))
+#writeLines(paste0("traits removed due to missingness >50% samples : ", length(fail.traits)))
 writeLines(paste0("resulting number of missing data points in peak area file : ", length(which(is.na(pa))), " (", round(100*((length(which(is.na(pa))))/(nrow(pa)*(ncol(pa)-2))),2), "%)"))
 writeLines(paste0("duplicate samples identified and removed : ", length(dup.samples)))
 writeLines(paste0(dup.samples, collapse=","))

@@ -185,6 +185,7 @@ process MATCH_PRS {
 	--sample-tsv $idmap \
 	--out ${type}.${prefix}.results \
         --threads $task.cpus \
+        --rint \
 	--lambda 1 \
 	--mahalanobis
     """
