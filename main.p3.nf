@@ -176,6 +176,12 @@ process MATCH_PRS {
           path(pheno_wide),
           path(idmap),
           path(pgs_subset)
+
+    output:
+    tuple val(type),
+          val(prefix),
+          path("${type}.${prefix}.results.match.all.tsv.gz")
+    
     
     script:
     """
@@ -192,6 +198,21 @@ process MATCH_PRS {
 }
 
 
+process PLOT_DIAGNOSTIC {
+
+    tag "$prefix"
+    
+    input:
+    tuple val(type),
+          val(prefix),
+          path(result)
+
+    script:
+    """
+    Rscript ${params.scripts}/plot.diagnostics.R $result
+    """          
+
+}
 
 workflow {
 
@@ -263,6 +284,7 @@ workflow {
         .mix(s1_methyl)
         .mix(s1_rna)
     
-    MATCH_PRS(SUBSET_PRS(GENIDMAP(step1)))
+    PLOT_DIAGNOSTIC(MATCH_PRS(SUBSET_PRS(GENIDMAP(step1))))
+
 }
 

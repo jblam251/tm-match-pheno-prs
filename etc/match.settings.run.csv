@@ -1,3 +1,7 @@
 type,prefix,pheno,pgs,omicsmap,traits,metabolite_annotation,protein_colmap
+<<<<<<< HEAD
 rnaseq,cardia,/net/topmed3/incoming/topmed/rnaseq/nygc/2024.0129.CARDIA/data/CARDIA.RNASeQC.gene_reads.txt.gz,./resources/tm.fz2.whole.blood.susie.rank1.top10k.freeze12c.prs.tsv.gz,./resources/TOPMed_Combined_Omics_SampleAttributes_DS_20260718.144003.wgs.frz.added.ltrc.added.txt,NA,NA,NA
 rnaseq,fhs2024,/net/topmed11/incoming/topmed/rnaseq/uw/2024.0629.fhs.rationalized/release_files/data/fhs.2024.0629.RNASeQC_gene_reads.gct.gz,./resources/tm.fz2.whole.blood.susie.rank1.top10k.freeze12c.prs.tsv.gz,./resources/TOPMed_Combined_Omics_SampleAttributes_DS_20260718.144003.wgs.frz.added.ltrc.added.txt,NA,NA,NA
+=======
+rnaseq,spiromics,/net/topmed11/working/jblamer/qc.xqtl/match/rna.bulk/original/meyers_topmed_to3_rnaseq_1.rsem_genes_expected_count.remap.torids.txt,./resources/gtex.V11.whole.blood.susie.freeze12c.prs.tsv.gz,./resources/TOPMed_Combined_Omics_SampleAttributes_DS_20260718.144003.wgs.frz.added.ltrc.added.txt,NA,NA,NA
+>>>>>>> add-diagnostic-plot
