@@ -76,5 +76,16 @@ process {
         memory = '32 GB'
         time = '00:30:00'
         maxForks = 2
+        errorStrategy = 'ignore'
+    }
+}
+
+process {
+    withName: PLOT_DIAGNOSTIC {
+        cpus = 1
+        memory = '4 GB'
+        time = '00:05:00'
+        maxForks = 2
+        errorStrategy = 'ignore'
     }
 }
