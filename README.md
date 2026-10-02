@@ -16,7 +16,7 @@ any study with paired genotype and multi-omics data.
 - [Quick Start](#quick-start)
 - [Pipeline Workflow](#pipeline-workflow)
 - [Creating a Settings File](#creating-a-settings-file)
-- [Calculating PGS (if necessary)](#calculating-pgs)
+- [Calculating PGS](#calculating-pgs) (optional)
 - [Running the Pipeline](#running-the-pipeline)
 - [Understanding the Result](#understanding-the-result)
 - [Example Input Files](#example-input-files)
