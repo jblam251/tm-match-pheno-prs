@@ -17,7 +17,7 @@ any study with paired genotype and multi-omics data.
 - [Pipeline Workflow](#pipeline-workflow)
 - [Configuration](#configuration)
 - [Creating a Settings File](#creating-a-settings-file)
-- [Calculating PGS Using `pair-prs`](#calculating-pgs-using-pair-prs)
+- [Calculating PGS (if necessary)](#calculating-pgs)
 - [Running the Pipeline](#running-the-pipeline)
 - [Understanding the Results](#understanding-the-results)
 - [Example Input Files](#example-input-files)
@@ -46,7 +46,7 @@ any study with paired genotype and multi-omics data.
 
 ## Quick Start
 
-A minimal test dataset is provided in `example/` to verify your installation works end-to-end. This example contains RNAseq and PGS from 50 samples from the 1000 Genomes Project. These are a subset of the participants used in the Multi-ancestry Analysis of Gene Expression ([MAGE][https://github.com/mccoy-lab/MAGE/]) data set.
+A minimal test dataset is provided in `example/` to verify your installation works end-to-end. This example contains RNAseq and PGS from 50 samples from the 1000 Genomes Project. These are a subset of the participants used in the Multi-ancestry Analysis of Gene Expression ([MAGE](https://github.com/mccoy-lab/MAGE/)) data set.
 
 ```bash
 git clone https://github.com/jblam251/tm-match-pheno-prs.git
@@ -65,7 +65,7 @@ rnaseq.run1.diagnostic.plot.png
 ## Pipeline Workflow
 ![Alt Text](images/pgs.schematic.1.png)
 
-1. Converts omics-specific molecular phenotype files into a PLINK-compatible format with sample identifiers in the first two columns (FID, IID) followed by the molecular traits in the remaining columns. This step is skipped if phenotypes are already in PLINK-compatible format.
+1. Converts omics-specific molecular phenotype files into a PLINK-compatible format with sample identifiers in the first two columns (FID, IID) followed by the molecular traits in the remaining columns. ***This step is skipped if phenotypes are already in PLINK-compatible format***
 2. Generates a genotype-to-omics identifier map.
 3. Subsets the polygenic score file to the relevant traits and samples.
 4. Compares polygenic scores to observed molecular phenotypes to assess sample identity.
@@ -80,7 +80,7 @@ A settings file is required to import the molecular phenotypes, polygenic scores
 | `type` | Yes | The omics data type specification. It must take one of the following: `rnaseq`, `methylation`, `metabolomics`, or `proteomics`. |
 | `prefix` | Yes | The prefix used for naming output files. |
 | `pheno` | Yes | The input file of molecular phenotypes. For RNAseq, metabolomics, and proteomics, this must specify the location of the gene expression summary table, metabolite peak area table, or the proteomics NPX table respectively.  For methylation, this should be the LEVEL3 directory which contains the noob-adjusted beta values.|
-| `pgs` |  Yes | The genotype-derived polygenic scores for each molecular trait.  If scores have yet to be generated, `qpgentools pair-prs` can calculate PGS when provided genotypes and a set of known QTL summary statistics.  See `pair-prs` below for more detail. |
+| `pgs` |  Yes | The genotype-derived polygenic scores for each molecular trait.  If scores have yet to be generated, `qpgentools pair-prs` can calculate PGS when provided genotypes and a set of known QTL summary statistics.  See [Calculating PGS](#calculating-pgs) for more detail. |
 | `omicsmap` | Yes | A file for mapping genotype identifiers to omics identifiers.  Genotype identifiers must appear in a column named `NWD_ID` while omics identifiers in column `SAMPLE_ID`. This file is still required even if the genotype and omics identifiers are the same.| 
 | `traits` | Metabolomics, Methylation | A single-column file of molecular trait labels. |
 | `metabolite_annotation` | Metabolomics | A metabolite annotation file. This is often provided provided during data generation and is sometimes called a Chemical annotation file. |
@@ -91,7 +91,7 @@ A settings file is required to import the molecular phenotypes, polygenic scores
 ## Calculating PGS Using `pair-prs`
 Polygenic scores must be in a PLINK-compatible format with the genotype identifiers in the first two columns (FID, IID) and the molecular traits in the remaining columns.  It's important to ensure the trait labels in the PGS file match those found in the molecular data set.
 
-While calculating PGS can be done in any number of ways, one method to accomplish this is `pair-prs` from the `qpgentools` software.  It requires two inputs: 
+Calculating PGS can be done any number of ways. One method to accomplish this is `pair-prs` from the `qpgentools` software.  It requires two inputs: 
 1. **Genotypes** — The genotype input is a tab-delimited file containing one row per chromosome. The fourth column specifies the PLINK2 PGEN prefix. (see [Example Input Files](#example-input-files) section for an example)
 
 2. **xQTL summary statistics** — The QTL summary statistics must contain columns for trait, variant,beta, standard error, and log10 p-value (see [Example Input Files](#example-input-files) section for an example)
@@ -108,9 +108,9 @@ qpgentools pair-prs \
 
 ## Running the Pipeline
 ```
-nextflow run main.p3.nf -c etc/nf.config.runx --settings [sample settings CSV]
+nextflow run main.p3.nf -config nf.config.runx --settings [sample settings CSV]
 ```
-* -c config.runx — a custom Nextflow config file specifying your execution environment
+* -config — a custom Nextflow config file specifying your execution environment
 * --settings — path to your settings CSV file.
 
 
@@ -118,7 +118,7 @@ nextflow run main.p3.nf -c etc/nf.config.runx --settings [sample settings CSV]
 
 ### Output Files
 
-There are four output files per analysis. In addition to a set of diagnostic plots (see below), the per-trait correlations between PGS and observed values are written to a compressed tab-separated file named **[type].[prefix].weights.tsv.gz**.  Abbreviated check results which exclude samples without assigned genotypes and feature simplified match catagories are written to a second compressed tab-separated file named ***[type].[prefix]***.match.assigned.tsv.gz.  Whereas the full identity check results are written to a third compressed tab-separated file named **[type].[prefix].match.all.tsv.gz**. This file contains one row per omics sample and includes the following information:
+There are four output files per analysis. In addition to a set of diagnostic plots (see below), the per-trait correlations between PGS and observed values are written to a compressed tab-separated file named ***[type].[prefix].weights.tsv.gz***.  Abbreviated check results which exclude samples without assigned genotypes and feature simplified match catagories are written to a second compressed tab-separated file named ***[type].[prefix].match.assigned.tsv.gz***.  Whereas the full identity check results are written to a third compressed tab-separated file named ***[type].[prefix].match.all.tsv.gz***. This file contains one row per omics sample and includes the following information:
 
 | Column | Description |
 |---|---|
@@ -140,7 +140,7 @@ whether its top genotype match corresponds to its assigned genotype (from
 z-score threshold:
 
 | Status | Defination | Interpretation | 
-|---|---|
+|---|---|---|
 | `SELF_BEST` | The assigned genotype **is** the top match (highest z-score) for the omics sample. | Strong evidence that the assigned genotype corresponds to the molecular sample |
 | `SELF_LENIENT` | The assigned genotype is **not** the top match, but its z-score still exceeds the lenient match threshold. | Assigned genotype is plausible but not the strongest match. | 
 | `UNCLEAR` | The assigned genotype is **not** the top match, and its z-score falls below the lenient match threshold. | Insufficient evidence for confident matching. | 
