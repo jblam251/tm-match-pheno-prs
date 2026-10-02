@@ -1,2 +1,0 @@
-type,prefix,pheno,pgs,omicsmap,traits,metabolite_annotation,protein_colmap
-metabolomics,cardia,/net/topmed11/incoming/topmed/metabolomics/baylor/CARDIA.2024.0415/CARDIA_BatchNormData_DS.txt,./resources/metab.qtl.2026.phase2.conditional.freeze12c.prs.tsv.gz,./resources/TOPMed_Combined_Omics_SampleAttributes_DS_20260718.144003.wgs.frz.added.ltrc.added.txt,./resources/metab.qtl.2026.phase2.traits.txt,/net/topmed11/incoming/topmed/metabolomics/baylor/CARDIA.2024.0415/CARDIA_ChemicalAnnotation_DS.txt,NA
