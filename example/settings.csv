@@ -1,0 +1,2 @@
+type,prefix,pheno,pgs,omicsmap,traits,metabolite_annotation,protein_colmap
+rnaseq,run1,example/rnaseq.tsv.gz,example/pgs.tsv.gz,example/mapping.tsv
