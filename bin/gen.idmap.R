@@ -14,7 +14,7 @@ gc(); Sys.sleep(5)
 print("files imported...")
 
 # subset md6 for only NWDs from frz12 (to match PRS)
-md6=md6[which(md6$NWD_ID.Freeze=="Freeze.12b"),]
+#md6=md6[which(md6$NWD_ID.Freeze=="Freeze.12b"),]
 
 # generate ID map file
 idmap=md6[match(smp, md6$SAMPLE_ID),c("NWD_ID","SAMPLE_ID")]

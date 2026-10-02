@@ -1,6 +1,3 @@
-params {
-    scripts = "/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/bin"
-}
 
 process {
     executor = 'slurm'

@@ -11,6 +11,14 @@ print(paste0("script called"))
 dat=as.data.frame(data.table::fread(args[1], sep="\t", header=T))
 print(paste0("expression data imported"))
 
+# if phenotypes already appear in PLINK format, write copy + exit
+if(identical(colnames(dat)[1:2],c("FID","IID"))) {
+  print(paste0("gene expression already appears to be in PLINK format, exiting.."))
+  write.table(dat,paste0(args[2], ".wide.tsv"), sep = "\t", col.names=T, row.names=F, quote=F)
+  quit(save="no", status=0)
+}
+
+
 ## find/rm any duplicate traits
 if(any(duplicated(dat[,2]))) {dat=dat[-which(duplicated(dat[,2])),]}
 

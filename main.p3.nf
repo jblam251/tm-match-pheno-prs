@@ -24,7 +24,7 @@ process PHENO2PL_PROTEIN {
 
     script:
     """
-    ${params.scripts}/pheno2pl_protein.R \
+    pheno2pl_protein.R \
         $pheno_input \
         $pheno_colmap \
         $prefix
@@ -53,11 +53,11 @@ process PHENO2PL_METABOLITE {
 
     script:
     """
-    Rscript ${params.scripts}/pheno2pl_metabolite.R \
-	--peak_areas $pheno_input \
-	--annotation $metabol_annotation \
-	--traits $traits \
-	--out $prefix
+    pheno2pl_metabolite.R \
+	$pheno_input \
+	$metabol_annotation \
+	$traits \
+	$prefix
     """
 }
 
@@ -82,11 +82,11 @@ process PHENO2PL_METHYLATION {
 
     script:
     """
-    ${params.scripts}/pheno2pl_methylation.sh \
+    pheno2pl_methylation.sh \
         $data_dir \
         $prefix \
         $traits \
-        ${params.scripts}/bind.betas.R
+        bind.betas.R
     """
 }
 
@@ -110,7 +110,7 @@ process PHENO2PL_RNASEQ {
 
     script:
     """
-    ${params.scripts}/pheno2pl_rnaseq.R \
+    pheno2pl_rnaseq.R \
         $pheno_input \
         $prefix
     """
@@ -136,7 +136,7 @@ process GENIDMAP {
     
     script:
     """
-    Rscript ${params.scripts}/gen.idmap.R $omicsmap $pheno_wide ${prefix}.idmap.tsv
+    gen.idmap.R $omicsmap $pheno_wide ${prefix}.idmap.tsv
     """          
 }
 
@@ -160,7 +160,7 @@ process SUBSET_PRS {
     
     script:
     """
-    ${params.scripts}/subset.prs.sh $pgs $idmap ${prefix}.pgs.tsv
+    subset.prs.sh $pgs $idmap ${prefix}.pgs.tsv
     """
 
 
@@ -185,12 +185,13 @@ process MATCH_PRS {
     
     script:
     """
-    /net/fantasia/home/hmkang/code/working/qpgen/bin/qpgentools match-prs-pheno \
+    qpgentools match-prs-pheno \
 	--pheno $pheno_wide \
 	--prs $pgs_subset \
 	--sample-tsv $idmap \
 	--out ${type}.${prefix}.results \
         --threads $task.cpus \
+	--z-threshold 1.96 \
         --rint \
 	--lambda 1 \
 	--mahalanobis
@@ -209,7 +210,7 @@ process PLOT_DIAGNOSTIC {
 
     script:
     """
-    Rscript ${params.scripts}/plot.diagnostics.R $result
+    plot.diagnostics.R $result
     """          
 
 }

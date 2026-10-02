@@ -18,16 +18,16 @@ library(edgeR)
 args=commandArgs(trailingOnly = T)
 print(paste0("script called"))
 
-##**## beg : 4 testing ##**##
-#args[1]="/net/topmed11/incoming/topmed/rnaseq/uw/2024.0629.fhs.rationalized/release_files/data/fhs.2024.0629.RNASeQC_gene_tpm.gct.gz"
-#args[2]="fhs2024"
-args[1]="/net/topmed3/incoming/topmed/rnaseq/nygc/2024.0129.CARDIA/data/CARDIA.RNASeQC.gene_tpm.txt.gz"
-args[2]="cardia"
-##**## end : 4 testing ##**##
-
 ## import phenotype files
 dat=as.data.frame(data.table::fread(args[1], sep="\t", header=T))
 print(paste0("expression data imported"))
+
+# if phenotypes already appear in PLINK format, write copy + exit
+if(identical(colnames(dat)[1:2],c("FID","IID"))) {
+  print(paste0("gene expression already appears to be in PLINK format, exiting.."))
+  write.table(dat,paste0(args[2], ".wide.tsv"), sep = "\t", col.names=T, row.names=F, quote=F)
+  quit(save="no", status=0)
+}
 
 ## find/rm any duplicate traits
 if(any(duplicated(dat[,2]))) {dat=dat[-which(duplicated(dat[,2])),]}

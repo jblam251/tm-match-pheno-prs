@@ -1,11 +1,10 @@
 #!/usr/bin/Rscript
 
 ## USAGE
-## $ csv2plink.$ [NPX CSV] [COL MAP FILE] [PREFIX]
+## Rscript pheno2pl_protein.R [NPX CSV] [COL MAP FILE] [PREFIX]
 
 ## initialize arg vector
 args=commandArgs(trailingOnly = T)
-#library(data.table)
 print(paste0("script called"))
 
 ## import npx and column-mapping files
@@ -13,6 +12,13 @@ dat=as.data.frame(data.table::fread(args[1], sep=",", header=T))
 #dat=read.csv(args[1], sep=",", header=T)
 map=read.csv(args[2], sep=",", header=T)
 print(paste0("npx data imported"))
+
+# if phenotypes already appear in PLINK format, write copy + exit
+if(identical(colnames(dat)[1:2],c("FID","IID"))) {
+  print(paste0("phenotypes already appear to be in PLINK format, exiting.."))
+  write.table(dat,paste0(args[3], ".wide.tsv"), sep = "\t", col.names=T, row.names=F, quote=F)
+  quit(save="no", status=0)
+}
 
 ## remove sample controls
 idx.smp.ctrl=which(colnames(dat)=="SampleType")
