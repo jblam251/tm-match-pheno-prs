@@ -87,7 +87,7 @@ A settings file is required to import the molecular phenotypes, polygenic scores
 
 
 
-## Calculating PGS (if necessary)
+## Calculating PGS
 Polygenic scores must be in a PLINK-compatible format with the genotype identifiers in the first two columns (FID, IID) and the molecular traits in the remaining columns.  It's important to ensure the trait labels in the PGS file match those found in the molecular data set.
 
 Calculating PGS can be done any number of ways. One method to accomplish this is `pair-prs` from the `qpgentools` software.  It requires two inputs: 
