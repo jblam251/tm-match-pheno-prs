@@ -15,11 +15,10 @@ any study with paired genotype and multi-omics data.
 - [Requirements](#requirements)
 - [Quick Start](#quick-start)
 - [Pipeline Workflow](#pipeline-workflow)
-- [Configuration](#configuration)
 - [Creating a Settings File](#creating-a-settings-file)
 - [Calculating PGS (if necessary)](#calculating-pgs)
 - [Running the Pipeline](#running-the-pipeline)
-- [Understanding the Results](#understanding-the-results)
+- [Understanding the Result](#understanding-the-result)
 - [Example Input Files](#example-input-files)
 - [Support](#support)
 
@@ -80,7 +79,7 @@ A settings file is required to import the molecular phenotypes, polygenic scores
 | `type` | Yes | The omics data type specification. It must take one of the following: `rnaseq`, `methylation`, `metabolomics`, or `proteomics`. |
 | `prefix` | Yes | The prefix used for naming output files. |
 | `pheno` | Yes | The input file of molecular phenotypes. For RNAseq, metabolomics, and proteomics, this must specify the location of the gene expression summary table, metabolite peak area table, or the proteomics NPX table respectively.  For methylation, this should be the LEVEL3 directory which contains the noob-adjusted beta values.|
-| `pgs` |  Yes | The genotype-derived polygenic scores for each molecular trait.  If scores have yet to be generated, `qpgentools pair-prs` can calculate PGS when provided genotypes and a set of known QTL summary statistics.  See [Calculating PGS](#calculating-pgs) for more detail. |
+| `pgs` |  Yes | The genotype-derived polygenic scores for each molecular trait.  If scores have yet to be generated, `qpgentools pair-prs` can calculate PGS when provided genotypes and a set of known QTL summary statistics.  See `Calculating PGS` below. |
 | `omicsmap` | Yes | A file for mapping genotype identifiers to omics identifiers.  Genotype identifiers must appear in a column named `NWD_ID` while omics identifiers in column `SAMPLE_ID`. This file is still required even if the genotype and omics identifiers are the same.| 
 | `traits` | Metabolomics, Methylation | A single-column file of molecular trait labels. |
 | `metabolite_annotation` | Metabolomics | A metabolite annotation file. This is often provided provided during data generation and is sometimes called a Chemical annotation file. |
@@ -88,7 +87,7 @@ A settings file is required to import the molecular phenotypes, polygenic scores
 
 
 
-## Calculating PGS Using `pair-prs`
+## Calculating PGS (if necessary)
 Polygenic scores must be in a PLINK-compatible format with the genotype identifiers in the first two columns (FID, IID) and the molecular traits in the remaining columns.  It's important to ensure the trait labels in the PGS file match those found in the molecular data set.
 
 Calculating PGS can be done any number of ways. One method to accomplish this is `pair-prs` from the `qpgentools` software.  It requires two inputs: 
