@@ -91,9 +91,9 @@ A settings file is required to import the molecular phenotypes, polygenic scores
 Polygenic scores must be in a PLINK-compatible format with the genotype identifiers in the first two columns (FID, IID) and the molecular traits in the remaining columns.  It's important to ensure the trait labels in the PGS file match those found in the molecular data set.
 
 Calculating PGS can be done any number of ways. One method to accomplish this is `pair-prs` from the `qpgentools` software.  It requires two inputs: 
-1. **Genotypes** — The genotype input is a tab-delimited file containing one row per chromosome. The fourth column specifies the PLINK2 PGEN prefix. (see [Example Input Files](#example-input-files) section for an example)
+1. **Genotypes** — The genotype input is a tab-delimited file containing one row per chromosome. The fourth column specifies the PLINK2 PGEN prefix. (see [Example Input Files](#example-input-files))
 
-2. **xQTL summary statistics** — The QTL summary statistics must contain columns for trait, variant,beta, standard error, and log10 p-value (see [Example Input Files](#example-input-files) section for an example)
+2. **xQTL summary statistics** — The QTL summary statistics must contain columns for trait, variant,beta, standard error, and log10 p-value (see [Example Input Files](#example-input-files))
 
 ```
 qpgentools pair-prs \
