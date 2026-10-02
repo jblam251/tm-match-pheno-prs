@@ -3,7 +3,6 @@
 # USAGE
 # $ ./beta.merge.sh [BETA DIR] [PREFIX] [PROBE LIST]
 
-#BINDR=/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/bin/bind.betas.R
 BETADIR=$1
 PREFIX=$2
 TRAITS=$3

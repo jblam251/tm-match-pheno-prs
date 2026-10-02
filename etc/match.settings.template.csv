@@ -1,5 +1,5 @@
 type,prefix,pheno,pgs,omicsmap,traits,metabolite_annotation,protein_colmap
-rnaseq,[prefix],[data],./resources/gtex.v9.whole.blood.susie.tm.eqtl.freeze12c.prs.tsv.gz,./resources/TOPMed_Combined_Omics_SampleAttributes_DS_20260718.144003.wgs.frz.added.ltrc.added.txt,NA,NA,NA
-proteomics,[prefix],[data],./resources/ukb_ppp_v2_sentinel_GeneNames.topmed_freeze12c_minDP0_cis.prs.tsv.gz,./resources/TOPMed_Combined_Omics_SampleAttributes_DS_20260718.144003.wgs.frz.added.ltrc.added.txt,NA,NA,./resources/npx.column.mapping.csv
-methylation,[prefix],[data],./resources/methyl.qtl.freeze12c.sentinel.p6e14.rank1.top10k.prs.tsv.gz,./resources/TOPMed_Combined_Omics_SampleAttributes_DS_20260718.144003.wgs.frz.added.ltrc.added.txt,./resources/TOPMed_mQTL_freeze1_traits_p6e14_rank1.top10k.tsv,NA,NA
-metabolomics,[prefix],[data],./resources/metab.qtl.2026.phase2.conditional.freeze12c.prs.tsv.gz,./resources/TOPMed_Combined_Omics_SampleAttributes_DS_20260718.144003.wgs.frz.added.ltrc.added.txt,./resources/metab.qtl.2026.phase2.traits.txt,/net/topmed11/incoming/topmed/metabolomics/baylor/CARDIA.2024.0415/CARDIA_ChemicalAnnotation_DS.txt,NA
+rnaseq,[prefix],[phenotypes],[pgs],[id map],NA,NA,NA
+proteomics,[prefix],[phenotypes],[pgs],[id map],NA,NA,[column map]
+metabolomics,[prefix],[phenotypes],[pgs],[id map],[traits],[metabolite annotation],NA
+methylation,[prefix],[phenotypes],[pgs],[id map],[traits],NA,NA

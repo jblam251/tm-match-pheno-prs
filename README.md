@@ -32,7 +32,7 @@ any study with paired genotype and multi-omics data.
 |---|---|
 | [Nextflow] | Tested with version `>=26.04.4` |
 | Java | Required by Nextflow; version `>=11` recommended |
-| R | Version `>=4.6` — with the following packages installed: `data.table`,  |
+| R | Version `>=4.6` — with the following packages installed: `data.table`, `ggplot2`, `gridExtra` |
 | [`qpgentools`](https://github.com/hyunminkang/qpgen) | Required for PGS calculation (`pair-prs`) and identity matching (`match-prs-pheno`). |
 
 > **Note:** This pipeline calls `qpgentools` as an external binary. 

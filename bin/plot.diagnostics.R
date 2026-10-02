@@ -8,7 +8,6 @@ library(gridExtra)
 
 ## import results
 args=commandArgs(trailingOnly = TRUE)
-#args[1]="/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/results/rnaseq.sagegalaii.results.match.all.tsv.gz"
 res=read.csv(args[1], sep="\t", header=T)
 
 ## define color key
@@ -16,7 +15,6 @@ colkey=data.frame(v1=c("SELF_BEST","SELF_LENIENT","SINGLE_NEW_BEST","MULTI_NEW_B
 
 ## generate plots
 fout=gsub("results.match.all.tsv.gz","diagnostic.plot.png",strsplit(args[1], "/")[[1]][length(strsplit(args[1], "/")[[1]])])
-#png(file=paste0("/net/topmed11/working/jblamer/id-checking/tm-match-pheno-prs/analysis/",fout), width=8, height=8, units="in", res=300)
 png(file=fout, width=8, height=8, units="in", res=300)
 
 res$MatchStatus[which(is.na(res$ID.self))]="NO_ASSIGNED_GT"
