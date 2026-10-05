@@ -29,7 +29,7 @@ any study with paired genotype and multi-omics data.
 
 | Dependency | Notes |
 |---|---|
-| [Nextflow] | Tested with version `>=26.04.4` |
+| Nextflow | Tested with version `>=26.04.4` |
 | Java | Required by Nextflow; version `>=11` recommended |
 | R | Version `>=4.6` — with the following packages installed: `data.table`, `ggplot2`, `gridExtra` |
 | [`qpgentools`](https://github.com/hyunminkang/qpgen) | Required for PGS calculation (`pair-prs`) and identity matching (`match-prs-pheno`). |
@@ -140,8 +140,8 @@ z-score threshold:
 
 | Status | Defination | Interpretation | 
 |---|---|---|
-| `SELF_BEST` | The assigned genotype **is** the top match (highest z-score) for the omics sample. | Strong evidence that the assigned genotype corresponds to the molecular sample |
-| `SELF_LENIENT` | The assigned genotype is **not** the top match, but its z-score still exceeds the lenient match threshold. | Assigned genotype is plausible but not the strongest match. | 
+| `SELF_BEST` | The assigned genotype **is** the top match (highest z-score) for the omics sample. | Assigned genotype corresponds to the molecular sample |
+| `SELF_LENIENT` | The assigned genotype is **not** the top match, but its z-score still exceeds the lenient match threshold. | Assigned genotype likely corresponds to the molecular sample. | 
 | `UNCLEAR` | The assigned genotype is **not** the top match, and its z-score falls below the lenient match threshold. | Insufficient evidence for confident matching. | 
 | `SINGLE_NEW_BEST` | The omics sample fails to match its assigned genotype, but shows a strong match to exactly **one** other, non-assigned genotype. | Potential sample swap with a single other genotype. | 
 | `MULTI_NEW_BEST` | The omics sample fails to match its assigned genotype, but shows a strong match to **more than one** other, non-assigned genotype. | Potential sample swap with multiple other genotypes. |
@@ -169,6 +169,14 @@ ENSG00000241860	316	389	147	222
 ENSG00000308579	0	0	0	0
 ENSG00000278267	0	0	1	2
 ENSG00000248901	0	0	0	0
+
+$ head -n6 pheno.correctly.formated.tsv | cut -f1-5
+FID	IID	ENSG00000268903	ENSG00000241860	ENSG00000308579	
+rna_1	rna_1	7	316	0
+rna_2	rna_2	5	389	0
+rna_3	rna_3	26	147	0
+rna_4	rna_4	20	222	0
+rna_5	rna_5	9	205	1
 
 $ head -n6 pgs.tsv | cut -f1-5
 FID	IID	ENSG00000268903	ENSG00000241860	ENSG00000308579	
