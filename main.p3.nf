@@ -61,6 +61,37 @@ process PHENO2PL_METABOLITE {
     """
 }
 
+
+process PHENO2PL_METABOLITE_BIDMC {
+
+    tag "$prefix"
+    
+    input:
+    tuple val(type),
+          val(prefix),
+          path(pheno_input),
+          path(pgs),
+          path(omicsmap),
+          path(traits),
+          path(metabol_annotation)
+    
+    output:
+    tuple val(type),
+          val(prefix),
+          path("${prefix}.wide.tsv"),
+          path(omicsmap),
+          path(pgs)
+
+    script:
+    """
+    pheno2pl_metabolite.bidmc.R \
+	$pheno_input \
+	$metabol_annotation \
+	$traits \
+	$prefix
+    """
+}
+
 process PHENO2PL_METHYLATION {
 
     tag "$prefix"
@@ -193,7 +224,7 @@ process MATCH_PRS {
         --threads $task.cpus \
 	--z-threshold 1.96 \
         --rint \
-	--lambda 1 \
+	--lambda 0.5 \
 	--mahalanobis
     """
 }
@@ -251,6 +282,21 @@ workflow {
         }
     s1_metabolite = PHENO2PL_METABOLITE(metabolite)
 
+    metaboliteBIDMC = samples
+        .filter { it.type == "metabolomics.bidmc" }
+        .map { row ->
+            tuple(
+                row.type,
+                row.prefix,
+                file(row.pheno),
+                file(row.pgs),
+                file(row.omicsmap),
+                file(row.traits),
+                file(row.metabolite_annotation)
+            )
+        }
+    s1_metaboliteBIDMC = PHENO2PL_METABOLITE_BIDMC(metaboliteBIDMC)
+
 
     methyl = samples
         .filter { it.type == "methylation" }
@@ -282,6 +328,7 @@ workflow {
     
     step1 = s1_protein
         .mix(s1_metabolite)
+        .mix(s1_metaboliteBIDMC)
         .mix(s1_methyl)
         .mix(s1_rna)
     
